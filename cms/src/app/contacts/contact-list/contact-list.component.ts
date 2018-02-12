@@ -15,7 +15,7 @@ export class ContactListComponent implements OnInit {
       'Trevor Albrethsen',
       'trevor.albrethsen@gmail.com',
       '541-971-9212',
-      'https://pbs.twimg.com/profile_images/642923299043868672/_QrM-TQR_400x400.jpg',
+      'https://pbs.twimg.com/profile_images/961045774103539712/HhZ2huYZ_400x400.jpg',
       null),
     new Contact(
       '2',
