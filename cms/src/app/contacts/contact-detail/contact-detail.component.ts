@@ -9,15 +9,6 @@ import { Contact } from '../contact.model';
 })
 export class ContactDetailComponent implements OnInit {
   @Input() contact: Contact;
-  @Input() contacts: Contact[] = [
-    new Contact(
-      '1',
-      'Trevor Albrethsen',
-      'trevor.albrethsen@gmail.com',
-      '541-971-9212',
-      'https://pbs.twimg.com/profile_images/642923299043868672/_QrM-TQR_400x400.jpg',
-      null)
-  ];
 
   constructor() { }
 
