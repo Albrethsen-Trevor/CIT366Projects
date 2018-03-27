@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 import { Contact } from '../contact.model';
 import {ContactService} from '../contact.service';
@@ -10,7 +10,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
   styleUrls: ['./contact-detail.component.css']
 })
 export class ContactDetailComponent implements OnInit {
-  @Input() contact: Contact;
+  contact: Contact;
   id: string;
 
   constructor(private contactService: ContactService,

@@ -16,6 +16,10 @@
         <p><b>Email:</b> {{ contact?.email }}</p>
         <p><b>Phone:</b> {{ contact?.phone }}</p>
       </div>
+      <div class="panel-body">
+        <span *ngIf="contact?.group !=null"><label><b>Contacts in Team:</b></label></span>
+      </div>
+      <cms-contact-item *ngFor="let contact of contact?.group" [contact]="contact"></cms-contact-item>
     </div>
   </div>
 </div>

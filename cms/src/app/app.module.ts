@@ -18,13 +18,15 @@ import { MessageEditComponent } from './messages/message-edit/message-edit.compo
 import { MessageListComponent } from './messages/message-list/message-list.component';
 import { DropdownDirective } from './shared/dropdown.directive';
 import { ContactService } from './contacts/contact.service';
-import {DocumentsService} from './documents/documents.service';
-import {MessagesService} from './messages/messages.service';
-import {AppRoutingModule} from './app-routing.module';
+import { DocumentsService } from './documents/documents.service';
+import { MessagesService } from './messages/messages.service';
+import { AppRoutingModule } from './app-routing.module';
 import { DocumentViewComponent } from './documents/document-view/document-view.component';
 import { DocumentEditComponent } from './documents/document-edit/document-edit.component';
-import {WindRefService} from './wind-ref.service';
+import { WindRefService } from './wind-ref.service';
 import { ContactEditComponent } from './contacts/contact-edit/contact-edit.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DndModule } from 'ng2-dnd';
 
 
 @NgModule({
@@ -50,7 +52,10 @@ import { ContactEditComponent } from './contacts/contact-edit/contact-edit.compo
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    DndModule.forRoot()
   ],
   providers: [ContactService,
               DocumentsService,
