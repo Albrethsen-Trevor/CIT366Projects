@@ -12,6 +12,7 @@ import {ContactService} from '../contact.service';
   styleUrls: ['./contact-list.component.css']
 })
 export class ContactListComponent implements OnInit {
+  term: string;
   contacts: Contact[] = [];
   private subscription: Subscription;
 
@@ -24,5 +25,9 @@ export class ContactListComponent implements OnInit {
           this.contacts = contacts;
         }
     );
+  }
+
+  onKeyPress(value: string) {
+    this.term = value;
   }
 }

@@ -27,6 +27,8 @@ import { WindRefService } from './wind-ref.service';
 import { ContactEditComponent } from './contacts/contact-edit/contact-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DndModule } from 'ng2-dnd';
+import { ContactsFilterPipe } from './contacts/contacts-filter.pipe';
+import {HttpModule} from '@angular/http';
 
 
 @NgModule({
@@ -48,14 +50,16 @@ import { DndModule } from 'ng2-dnd';
     DropdownDirective,
     DocumentViewComponent,
     DocumentEditComponent,
-    ContactEditComponent
+    ContactEditComponent,
+    ContactsFilterPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    DndModule.forRoot()
+    DndModule.forRoot(),
+    HttpModule
   ],
   providers: [ContactService,
               DocumentsService,

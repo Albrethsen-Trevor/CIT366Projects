@@ -1,19 +1,17 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import { Contact } from './contact.model';
-import { MOCKCONTACTS } from './MOCKCONTACTS';
 import { Subject } from 'rxjs/Subject';
+import { Http, Response } from '@angular/http';
 
 @Injectable()
 export class ContactService {
   contactSelectedEvent = new EventEmitter<Contact>();
-  contactChangedEvent = new EventEmitter<Contact[]>();
   contactListChangedEvent = new Subject<Contact[]>();
   maxContactId: number;
   contacts: Contact[] = [];
 
-  constructor() {
-    this.contacts = MOCKCONTACTS;
-    this.maxContactId = this.getMaxId();
+  constructor(private http: Http) {
+    this.initContacts();
   }
 
   getContacts() {
@@ -62,8 +60,7 @@ export class ContactService {
     this.maxContactId++;
     newContact.id = this.maxContactId.toString();
     this.contacts.push(newContact);
-    const contactsListClone = this.contacts.slice();
-    this.contactListChangedEvent.next(contactsListClone);
+    this.storeContacts();
   }
 
   updateContact(originalContact: Contact, newContact: Contact) {
@@ -78,8 +75,7 @@ export class ContactService {
 
     newContact.id = originalContact.id;
     this.contacts[pos] = newContact;
-    const contactsListClone = this.contacts.slice();
-    this.contactListChangedEvent.next(contactsListClone);
+    this.storeContacts();
   }
 
   deleteContact(contact: Contact) {
@@ -93,7 +89,32 @@ export class ContactService {
     }
 
     this.contacts.splice(pos, 1);
-    const contactsListClone: Contact[] = this.contacts.slice();
-    this.contactListChangedEvent.next(contactsListClone);
+    this.storeContacts();
+  }
+
+  storeContacts() {
+    return this.http.put('https://albrethsencms.firebaseio.com/contacts.json',
+      JSON.stringify(this.contacts),
+      'Content-type: application/json', )
+      .subscribe(() =>
+        (this.contactListChangedEvent.next(this.contacts.slice())));
+  }
+
+  initContacts() {
+    this.http.get('https://albrethsencms.firebaseio.com/contacts.json')
+      .map(
+        (response: Response) => {
+          const contacts: Contact[] = response.json();
+          return contacts;
+        }
+      )
+      .subscribe(
+        (contactsReturned: Contact[]) => {
+          this.contacts = contactsReturned;
+          this.maxContactId = this.getMaxId();
+          const contactsListClone = this.contacts.slice();
+          this.contactListChangedEvent.next(contactsListClone);
+        }
+      );
   }
 }
