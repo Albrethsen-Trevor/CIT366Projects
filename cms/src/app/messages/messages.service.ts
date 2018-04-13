@@ -1,7 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Message } from './message.model';
 import { Http, Response } from '@angular/http';
-import 'rxjs/Rx';
 
 @Injectable()
 export class MessagesService {
